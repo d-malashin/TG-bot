@@ -13,7 +13,7 @@ bot.on('message', async (msg) => {
 
     // Send the message to the OpenAI API
     const response = await axios.post(
-      'https://api.openai.com/v1/engines/davinci-codex/completions',
+      'https://api.openai.com/v1/chat/completions',
       {
         prompt: messageText,
         max_tokens: 150,
