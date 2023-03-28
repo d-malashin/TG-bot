@@ -1,0 +1,13 @@
+{
+  "name": "TG-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for GPT",
+  "main": "index.js",
+  "repository": "https://github.com/d-malashin/TG-bot.git",
+  "author": "Denis Malashin <dmalashin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
