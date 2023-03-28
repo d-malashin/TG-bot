@@ -1,7 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import axios from 'axios';
 
-const token = '5804517790:AAE6pXp_yV6aANnCyVOHBHqpULO-vyUO570';
+const token = process.env.TG_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on('message', async (msg) => {
@@ -22,7 +22,7 @@ bot.on('message', async (msg) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer YOUR_API_KEY_HERE',
+          Authorization: `Bearer ${process.env.OPENAI_TOKEN}`,
         },
       },
     );
