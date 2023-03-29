@@ -3,7 +3,6 @@ const axios = require('axios/dist/node/axios.cjs');
 require('dotenv').config();
 
 const token = process.env.TG_TOKEN;
-console.log(token);
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on('message', async (msg) => {
@@ -15,11 +14,9 @@ bot.on('message', async (msg) => {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        prompt: messageText,
-        max_tokens: 150,
-        temperature: 0.5,
-        n: 1,
-        stop: ['\n'],
+        model: "gpt-3.5-turbo",
+        messages: [{role: "user", content: messageText}],
+        temperature: 0.7
       },
       {
         headers: {
@@ -27,10 +24,12 @@ bot.on('message', async (msg) => {
           Authorization: `Bearer ${process.env.OPENAI_TOKEN}`,
         },
       },
-    );
+    ).catch((e) => {
+      console.error(e)
+    });
 
     // Get the generated text from the API response
-    const generatedText = response.data.choices[0].text;
+    const generatedText = response.data.choices[0].message.content;
 
     // Send the generated text back to the user
     bot.sendMessage(chatId, generatedText);
